@@ -1,0 +1,5 @@
+#访问地址为:127.0.0.1:25080
+server:
+ port: 25080
+ servlet:
+  context-path: /
