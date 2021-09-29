@@ -3,3 +3,71 @@ server:
  port: 25080
  servlet:
   context-path: /
+
+
+#多数据源配置-这里舍弃了spring的自动配置，需要手动配置了，spring的自动配置为spring.datasource.url级别
+spring: 
+  datasource: 
+    druid:
+      #主数据库
+      master:
+        #数据源驱动类型
+        type: com.alibaba.druid.pool.DruidDataSource
+        #?后的那串要记得加，不然会报时区错误
+        url: jdbc:mysql://127.0.0.1:3306/springboot-mutids-demo-master?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=GMT%2B8
+        username: root
+        password: 83956276
+        #数据源驱动类名
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        #druid连接池配置
+        #参考链接：https://cloud.tencent.com/developer/article/1609334
+        # 初始化大小，最小，最大
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+        # 配置获取连接等待超时的时间(毫秒)
+        maxWait: 60000
+        maxPoolPreparedStatementPerConnectionSize: 20
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        timeBetweenEvictionRunsMillis: 60000
+        # 配置有一个连接在连接池中的最小生存时间，单位是毫秒
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        poolPreparedStatements: true
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+      #从数据库
+      slave:
+        #数据源驱动类型
+        type: com.alibaba.druid.pool.DruidDataSource
+        #?后的那串要记得加，不然会报时区错误
+        url: jdbc:mysql://127.0.0.1:3306/springboot-mutids-demo-salve?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=GMT%2B8
+        username: root
+        password: 83956276
+        #数据源驱动类名
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        #druid连接池配置
+        #参考链接：https://cloud.tencent.com/developer/article/1609334
+        # 初始化大小，最小，最大
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+        # 配置获取连接等待超时的时间(毫秒)
+        maxWait: 60000
+        maxPoolPreparedStatementPerConnectionSize: 20
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        timeBetweenEvictionRunsMillis: 60000
+        # 配置有一个连接在连接池中的最小生存时间，单位是毫秒
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1 FROM DUAL
+        poolPreparedStatements: true
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        
+#mybatis配置,这里要将mapper-locations改成mapper_locations，不然启动不了
+mybatis:
+  #本地sql配置文件路径地址
+  mapper-locations: classpath:mapper/**/*.xml 
+  config-location: classpath:mybatis/mybatis-config.xml

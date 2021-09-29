@@ -30,6 +30,7 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- mysql -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -44,11 +45,18 @@
 		</dependency>
 		
 		<!-- druid -->
-        <dependency>
+<!--   <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.1.11</version>
-        </dependency>
+        </dependency> -->
+        
+        <!-- druid连接池 -->
+		<dependency> 
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>druid-spring-boot-starter</artifactId>
+		    <version>1.1.9</version>
+		</dependency>
         
 		<!-- jdbc-->
     	<dependency>
@@ -85,7 +93,17 @@
 		    <artifactId>junit</artifactId>
 		    <scope>test</scope><!-- 如果编译不通过，去掉这行即可 -->
 		</dependency>
-		
+
+		<!-- 
+			com.godink.springboot.mutids.demo.config.DataSourceConfigurer.master()
+			这种加注解@ConfigurationProperties(prefix = "spring.datasource.druid.master")
+			就需要这个
+		 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 
 	<build>
