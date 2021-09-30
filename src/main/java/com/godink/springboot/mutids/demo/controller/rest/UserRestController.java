@@ -20,6 +20,7 @@ public class UserRestController {
 	@Autowired
 	private UserService userService;
 
+	/**注解在controller层*/
 	@GetMapping("/default")
 	@TargetDataSource
 	public ResponseEntity<List<UserDo>> getAllUserDefault() {
@@ -36,5 +37,21 @@ public class UserRestController {
 	@TargetDataSource(DataSourceKey.SLAVE)
 	public ResponseEntity<List<UserDo>> getAllUserSlave() {
 		return ResponseEntity.ok(userService.getAllUser());
+	}
+	
+	/**注解在service层*/
+	@GetMapping("/service/default")
+	public ResponseEntity<List<UserDo>> getAllUserDefaultService() {
+		return ResponseEntity.ok(userService.getAllUserDefault());
+	}
+	
+	@GetMapping("/service/master")
+	public ResponseEntity<List<UserDo>> getAllUserMasterService() {
+		return ResponseEntity.ok(userService.getAllUserMaster());
+	}
+	
+	@GetMapping("/service/slave")
+	public ResponseEntity<List<UserDo>> getAllUserSlaveService() {
+		return ResponseEntity.ok(userService.getAllUserSlave());
 	}
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.godink.springboot.mutids.demo.annotation.TargetDataSource;
+import com.godink.springboot.mutids.demo.enums.DataSourceKey;
 import com.godink.springboot.mutids.demo.mapper.UserMapper;
 import com.godink.springboot.mutids.demo.model.UserDo;
 import com.godink.springboot.mutids.demo.service.UserService;
@@ -17,6 +19,24 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public List<UserDo> getAllUser() {
+		return userMapper.getAllUser();
+	}
+
+	@Override
+	@TargetDataSource
+	public List<UserDo> getAllUserDefault() {
+		return userMapper.getAllUser();
+	}
+
+	@Override
+	@TargetDataSource(DataSourceKey.MASTER)
+	public List<UserDo> getAllUserMaster() {
+		return userMapper.getAllUser();
+	}
+
+	@Override
+	@TargetDataSource(DataSourceKey.SLAVE)
+	public List<UserDo> getAllUserSlave() {
 		return userMapper.getAllUser();
 	}
 

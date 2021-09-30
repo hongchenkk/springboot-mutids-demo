@@ -5,6 +5,12 @@ import java.util.List;
 import com.godink.springboot.mutids.demo.model.UserDo;
 
 public interface UserService {
-
+	
 	List<UserDo> getAllUser();
+
+	List<UserDo> getAllUserDefault();
+	
+	List<UserDo> getAllUserMaster();
+	
+	List<UserDo> getAllUserSlave();
 }

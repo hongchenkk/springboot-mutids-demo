@@ -58,6 +58,7 @@ public class DataSourceConfigurer {
 		dataSources.put(DataSourceKey.SLAVE.getName(), slave());
 		
 		DynamicRoutingDataSource dynamicRoutingDataSource = new DynamicRoutingDataSource();
+		//当不配置数据源注解，既TargetDataSouce时，默认使用的数据源
 		dynamicRoutingDataSource.setDefaultTargetDataSource(master());
 		dynamicRoutingDataSource.setTargetDataSources(dataSources);
 		dynamicRoutingDataSource.afterPropertiesSet();
